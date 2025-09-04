@@ -2,10 +2,13 @@ using UnityEngine;
 
 namespace AppCommunications
 {
-    public abstract class StateSubscriber : MonoBehaviour
+    public abstract class SingleStateSubscriber :MonoBehaviour, IStateSubscriber
     {
+        [Tooltip("The state to be handled by this subscriber")]
         [SerializeField]
         public AppState m_StateToHandle;
+
+        [Tooltip("The pusblisher broadcast the states and data")]
         [SerializeField]
         public StatePublisher m_StatePublisher;
 
@@ -19,7 +22,11 @@ namespace AppCommunications
             m_StatePublisher.NotifySubscribers -= OnNotifySubscribers;
         }
 
-        protected virtual void OnNotifySubscribers(AppState state, PublishedData eventdata)
+        public abstract void HandleState(AppState state, PublishedData data);
+
+        public abstract void IgnoreState(AppState state, PublishedData data);
+
+        public virtual void OnNotifySubscribers(AppState state, PublishedData eventdata)
         {
             if (state == m_StateToHandle)
             {
@@ -30,9 +37,5 @@ namespace AppCommunications
                 IgnoreState(state, eventdata);
             }
         }
-
-        protected abstract void HandleState(AppState state, PublishedData data);
-
-        protected abstract void IgnoreState(AppState state, PublishedData data);
     }
 }

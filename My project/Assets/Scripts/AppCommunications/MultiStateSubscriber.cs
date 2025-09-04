@@ -1,40 +1,37 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace AppCommunications
 {
-    public class MultiStateSubscriber : StateSubscriber
+    [Serializable]
+    public abstract class MultiStateSubscriber : MonoBehaviour,IStateSubscriber
     {
+        [Tooltip("The states to be handled by this subscriber")]
         [SerializeField]
         private List<AppState> m_StatesToHandle;
 
-        protected override void OnNotifySubscribers(AppState state, PublishedData eventdata)
+        [Tooltip("The pusblisher broadcast the states and data")]
+        [SerializeField]
+        public StatePublisher m_StatePublisher;
+
+        protected virtual void Awake()
         {
-            switch (state)
-            {
-                case AppState.LandingScreen:
-                    break;
-                case AppState.Submenu:
-                    break;
-                case AppState.Inactive:
-                    break;
-                case AppState.VideoPlayer:
-                    break;
-                case AppState.ImageViewer:
-                    break;
-                case AppState.About:
-                    break;
-                default:
-                    break;
-            }
+            m_StatePublisher.NotifySubscribers += OnNotifySubscribers;
         }
-        protected override void HandleState(AppState state, PublishedData data)
+
+        protected virtual void OnDestroy()
+        {
+            m_StatePublisher.NotifySubscribers -= OnNotifySubscribers;
+        }
+        public abstract void OnNotifySubscribers(AppState state, PublishedData eventdata);
+        public virtual void HandleState(AppState state, PublishedData data)
         {
             //rise and shine
         }
-        protected override void IgnoreState(AppState state, PublishedData data)
+        public virtual void IgnoreState(AppState state, PublishedData data)
         {
-           //wrap up and hide
+            //wrap up and hide
         }
     }
 }

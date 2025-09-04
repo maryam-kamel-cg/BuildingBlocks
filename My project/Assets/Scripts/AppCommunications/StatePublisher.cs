@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AppCommunications
 {
-    public class StatePublisher : MonoBehaviour
+    public sealed class StatePublisher : MonoBehaviour
     {
         public Action<AppState, PublishedData> NotifySubscribers;
 
@@ -19,6 +19,12 @@ namespace AppCommunications
         public void PublishAppState(AppState state, PublishedData headers)
         {
             NotifySubscribers?.Invoke(state, headers);
+        }
+
+        [ContextMenu("PublishCurrentState")]
+        private void publishCurrentState()
+        { 
+            PublishAppState(m_CurrentState, new PublishedData());
         }
     }
 }
