@@ -65,7 +65,7 @@ namespace AppCommunications
         private IEnumerator IdleSwitchToInactiveState()
         {
             yield return new WaitForSeconds(m_IdleDuration);
-            m_StatePublisher.PublishAppState(AppState.Inactive, new PublishedData());
+            m_StatePublisher.PublishAppState(AppState.Stat3, new PublishedData());
         }
     }
 }

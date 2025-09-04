@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace AppCommunications
 {
+    /// <summary>
+    /// This class responsible for publishing app states,
+    /// add as a gameobject in the scene and assign it to subscribers
+    /// </summary>
     public sealed class StatePublisher : MonoBehaviour
     {
         public Action<AppState, PublishedData> NotifySubscribers;
@@ -12,8 +16,8 @@ namespace AppCommunications
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
         {
-            m_CurrentState = AppState.LandingScreen;
-            PublishAppState(AppState.LandingScreen, new PublishedData());
+            m_CurrentState = AppState.State1;
+            PublishAppState(AppState.State1, new PublishedData());
         }
 
         public void PublishAppState(AppState state, PublishedData headers)

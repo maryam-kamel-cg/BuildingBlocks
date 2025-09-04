@@ -7,22 +7,22 @@ public class MutlistateController : MultiStateSubscriber
     {
         switch (state)
         {
-            case AppState.LandingScreen:
+            case AppState.State1:
                 Debug.Log("State1");
                 break;
-            case AppState.Submenu:
+            case AppState.State2:
                 Debug.Log("State2");
                 break;
-            case AppState.Inactive:
+            case AppState.Stat3:
                 Debug.Log("State3");
                 break;
-            case AppState.VideoPlayer:
+            case AppState.State4:
                 Debug.Log("State4");
                 break;
-            case AppState.ImageViewer:
+            case AppState.State5:
                 Debug.Log("State5");
                 break;
-            case AppState.About:
+            case AppState.State6:
                 Debug.Log("State6");
                 break;
         }

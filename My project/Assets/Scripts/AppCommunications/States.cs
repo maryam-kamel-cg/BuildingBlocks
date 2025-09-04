@@ -1,8 +1,9 @@
 namespace AppCommunications
 {
+    //finite app states
     public enum AppState
     {
-        LandingScreen, Submenu, Inactive, VideoPlayer, ImageViewer,About
+        State1, State2, Stat3, State4, State5, State6
     }
 }
 
