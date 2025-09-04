@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace AppCommunications
@@ -24,7 +23,7 @@ namespace AppCommunications
         {
             if (state == m_StateToHandle)
             {
-                HandleState(state,eventdata);
+                HandleState(state, eventdata);
             }
             else
             {
