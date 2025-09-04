@@ -7,13 +7,13 @@ namespace AppCommunications
     [Serializable]
     public abstract class MultiStateSubscriber : MonoBehaviour,IStateSubscriber
     {
-        [Tooltip("The states to be handled by this subscriber")]
-        [SerializeField]
-        private List<AppState> m_StatesToHandle;
-
         [Tooltip("The pusblisher broadcast the states and data")]
         [SerializeField]
         public StatePublisher m_StatePublisher;
+
+        [Tooltip("The states to be handled by this subscriber")]
+        [SerializeField]
+        private List<AppState> m_StatesToHandle;
 
         protected virtual void Awake()
         {
