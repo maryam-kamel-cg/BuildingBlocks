@@ -9,11 +9,11 @@ namespace AppCommunications
     {
         [Tooltip("The pusblisher broadcast the states and data")]
         [SerializeField]
-        public StatePublisher m_StatePublisher;
+        protected StatePublisher m_StatePublisher;
 
         [Tooltip("The states to be handled by this subscriber")]
         [SerializeField]
-        private List<AppState> m_StatesToHandle;
+        protected List<AppState> m_StatesToHandle;
 
         protected virtual void Awake()
         {
@@ -25,13 +25,7 @@ namespace AppCommunications
             m_StatePublisher.NotifySubscribers -= OnNotifySubscribers;
         }
         public abstract void OnNotifySubscribers(AppState state, PublishedData eventdata);
-        public virtual void HandleState(AppState state, PublishedData data)
-        {
-            //rise and shine
-        }
-        public virtual void IgnoreState(AppState state, PublishedData data)
-        {
-            //wrap up and hide
-        }
+        public abstract void HandleState(AppState state, PublishedData data);
+        public abstract void IgnoreState(AppState state, PublishedData data);
     }
 }

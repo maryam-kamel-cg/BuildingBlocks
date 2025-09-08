@@ -5,6 +5,19 @@ public class MutlistateController : MultiStateSubscriber
 {
     public override void OnNotifySubscribers(AppState state, PublishedData eventdata)
     {
+        // Fix: Use a lambda expression to provide a Predicate<AppState> to the Find method
+        if (base.m_StatesToHandle.Contains(state))
+        {
+            HandleState(state, eventdata);
+        }
+        else
+        {
+            IgnoreState(state, eventdata);
+        }
+    }
+
+    public override void HandleState(AppState state, PublishedData data)
+    {
         switch (state)
         {
             case AppState.State1:
@@ -26,5 +39,9 @@ public class MutlistateController : MultiStateSubscriber
                 Debug.Log("State6");
                 break;
         }
+    }
+
+    public override void IgnoreState(AppState state, PublishedData data)
+    {
     }
 }
