@@ -20,15 +20,25 @@ namespace AppCommunications
             PublishAppState(AppState.State1, new PublishedData());
         }
 
+        [ContextMenu("PublishCurrentState")]
+        private void publishCurrentState()
+        {
+            PublishAppState(m_CurrentState, new PublishedData());
+        }
+
         public void PublishAppState(AppState state, PublishedData headers)
         {
             NotifySubscribers?.Invoke(state, headers);
         }
 
-        [ContextMenu("PublishCurrentState")]
-        private void publishCurrentState()
+        /// <summary>
+        /// to be used with editor events to be set from editor
+        /// </summary>
+        /// <param name="state">state set through editor</param>
+        public void SetCurrentState(AppState state) 
         { 
-            PublishAppState(m_CurrentState, new PublishedData());
+            m_CurrentState = state;
+            publishCurrentState();
         }
     }
 }
